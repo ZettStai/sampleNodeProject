@@ -45,6 +45,46 @@ function getAllPeople(callback) {
   });
 }
 
+function deletePerson() {
+    MongoClient.connect(url, function(err, db) {
+        assert.equal(null, err);
+        console.log("Connected correctly to server");
+
+        var deleteDocument = function(db, callback) {
+            // Get the documents collection
+            var collection = db.collection('demo');
+            // Insert some documents
+            collection.deleteOne({ name : "Arya" }, function(err, result) {
+                assert.equal(err, null);
+                assert.equal(1, result.result.n);
+                console.log("Removed the document with the field a equal to Arya");
+                callback(result);
+            });
+        }
+
+    });
+}
+
+/*function updatePerson(modPerson) {
+    MongoClient.connect(url, function(err, db) {
+        assert.equal(null, err);
+        console.log("Connected correctly to server");
+
+        var updateDocument = function(db, callback) {
+            // Get the documents collection
+            var collection = db.collection('demo');
+
+        // Update document where name is Arya, set age equal to 1
+        db.collection.updateOne({ name : Arya }
+            , { $set: { age : 1 } }, function(err, result) {
+                assert.equal(err, null);
+                assert.equal(1, result.result.n);
+                console.log("Updated the document with the field a equal to Lizette");
+                callback(result);
+            });
+    }
+}*/
+
 app.post('/add', function(req, res) {
   let person = req.body;
   addPerson(person);
@@ -57,6 +97,11 @@ app.get('/read', function (req, res) {
      res.send(people);
    });
  });
+
+app.delete('/delete', function (req,res) {
+    deletePerson();
+    res.send('Deleted Arya');
+});
 
 // respond with "hello world" when a GET request is made to the homepage
 app.get('/', function (req, res) {

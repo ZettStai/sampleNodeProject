@@ -39,7 +39,7 @@ function showPeople(data) {
   ul.innerHTML = '';
   peopleArr.forEach(function(person) {
     var li = document.createElement('li');
-    li.append(person.name);
+    li.append(person.name + ": " + person.age);
     ul.append(li);
   });
 }
