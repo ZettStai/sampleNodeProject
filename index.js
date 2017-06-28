@@ -50,17 +50,19 @@ function deletePerson() {
         assert.equal(null, err);
         console.log("Connected correctly to server");
 
-        var deleteDocument = function(db, callback) {
-            // Get the documents collection
-            var collection = db.collection('demo');
-            // Insert some documents
-            collection.deleteOne({ name : "Arya" }, function(err, result) {
-                assert.equal(err, null);
-                assert.equal(1, result.result.n);
-                console.log("Removed the document with the field a equal to Arya");
-                callback(result);
-            });
-        }
+        db.collection('demo').findOneAndDelete({name: "Arya"});
+
+        // // var deleteDocument = function(db, callback) {
+        // //     // Get the documents collection
+        //     var collection = db.collection('demo');
+        //     // Insert some documents
+        //     collection.deleteOne({ name : "Arya" }, function(err, result) {
+        //         assert.equal(err, null);
+        //         assert.equal(1, result.result.n);
+        //         console.log("Removed the document with the field a equal to Arya");
+        //         // callback(result);
+        //      });
+        // // }
 
     });
 }

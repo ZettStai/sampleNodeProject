@@ -1,7 +1,10 @@
 'use strict';
 
 var xhr = new XMLHttpRequest(),
-    submit = document.querySelectorAll('#submit')[0];
+    submit = document.querySelectorAll('#submit')[0],
+    del = document.querySelectorAll('#delete')[0];
+
+// Add
 
 xhr.open("GET", "/read");
 xhr.send();
@@ -20,8 +23,8 @@ submit.addEventListener('click', function() {
       xhr.open("GET", "/read");
       xhr.send();
       showPeople();
-  }
-});
+        }
+    });
 });
 
 xhr.addEventListener("readystatechange", function () {
@@ -29,6 +32,8 @@ xhr.addEventListener("readystatechange", function () {
     showPeople(JSON.parse(this.responseText));
   }
 });
+
+// Read
 
 function showPeople(data) {
   var ul = document.querySelectorAll('#people')[0],
@@ -43,3 +48,23 @@ function showPeople(data) {
     ul.append(li);
   });
 }
+
+// Delete
+
+del.addEventListener('click', function() {
+
+    var delXhr = new XMLHttpRequest();
+
+    delXhr.addEventListener("readystatechange", function () {
+        // if (this.readyState === 4) {
+            xhr.open("DELETE", "/delete");
+//            deletePerson();
+            xhr.send();
+        // }
+    });
+});
+
+$("ul").on("click", "button", function(e) {
+    e.preventDefault();
+    $(this).parent().remove();
+});
