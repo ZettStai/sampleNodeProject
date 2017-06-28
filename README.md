@@ -1,3 +1,5 @@
+Read the [wiki](https://github.com/robeau/sampleNodeProject/wiki) to see the process we've gone through in creating this web application.
+
 ## Sample Node Application
 
 #### Running the app locally
