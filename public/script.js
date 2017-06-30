@@ -52,19 +52,6 @@ function showPeople(data) {
 // Delete
 
 del.addEventListener('click', function() {
-
-    var delXhr = new XMLHttpRequest();
-
-    delXhr.addEventListener("readystatechange", function () {
-        // if (this.readyState === 4) {
-            xhr.open("DELETE", "/delete");
-//            deletePerson();
-            xhr.send();
-        // }
+    xhr.open("DELETE", "/delete");
+    xhr.send();
     });
-});
-
-$("ul").on("click", "button", function(e) {
-    e.preventDefault();
-    $(this).parent().remove();
-});
